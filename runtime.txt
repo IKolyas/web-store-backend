@@ -1,2 +1,0 @@
-python-3.9.0
-web: gunicorn seb-store-backend.wsgi --log-file -
