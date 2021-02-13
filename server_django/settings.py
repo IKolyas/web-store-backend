@@ -118,6 +118,8 @@ AUTH_PASSWORD_VALIDATORS = [
 #     'http://192.168.0.1',
 # ]
 
+CORS_URLS_REGEX = r'^/api/.*$'
+
 
 # CORS_ALLOW_ALL_ORIGINS = True
 
