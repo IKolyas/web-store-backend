@@ -107,19 +107,11 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-#
-# CORS_ALLOWED_ORIGINS = [
-#     'http://192.168.0.2:8080',
-#     'http://127.0.0.1',
-#     'http://localhost:8080',
-#     'http://192.168.42.174:8080',
-#     'http://192.168.0.11:8080',
-#     'http://192.168.0.10',
-#     'http://192.168.0.1',
-# ]
 
-CORS_URLS_REGEX = r'^/api/.*$'
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    'https://web-store-front.herokuapp.com/',
+]
+
 
 # CORS_ALLOW_ALL_ORIGINS = True
 
@@ -128,7 +120,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 4,
     # 'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework_simplejwt.authentication.JWTAuthentication']
-    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.SessionAuthentication'],
+    # 'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.SessionAuthentication'],
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
     )
