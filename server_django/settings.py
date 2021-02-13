@@ -25,10 +25,7 @@ SECRET_KEY = 'b@g+qv-0&@pv($r@3&hlr+3mbzq8c^p3s0ec=mufc&%2491#(@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-
-    'http://0.0.0.0:8000',
-]
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -115,7 +112,6 @@ CORS_ALLOWED_ORIGINS = [
     'http://192.168.0.11:8080',
     'http://192.168.0.10',
     'http://192.168.0.1',
-    'http://0.0.0.0:8000',
 ]
 
 
