@@ -108,15 +108,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 #
-CORS_ALLOWED_ORIGINS = [
-    'http://192.168.0.2:8080',
-    'http://127.0.0.1',
-    'http://localhost:8080',
-    'http://192.168.42.174:8080',
-    'http://192.168.0.11:8080',
-    'http://192.168.0.10',
-    'http://192.168.0.1',
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://192.168.0.2:8080',
+#     'http://127.0.0.1',
+#     'http://localhost:8080',
+#     'http://192.168.42.174:8080',
+#     'http://192.168.0.11:8080',
+#     'http://192.168.0.10',
+#     'http://192.168.0.1',
+# ]
 
 
 # CORS_ALLOW_ALL_ORIGINS = True
