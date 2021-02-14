@@ -62,8 +62,17 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
     'web-store-front.herokuapp.com',
-
 ]
+CORS_ALLOW_HEADERS = (
+        'x-requested-with',
+        'content-type',
+        'accept',
+        'origin',
+        'authorization',
+        'x-csrftoken'
+        'Access-Control-Allow-Origin'
+)
+CORS_ORIGIN_WHITELIST = ['*']
 
 
 ROOT_URLCONF = 'server_django.urls'
