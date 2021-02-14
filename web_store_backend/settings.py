@@ -157,7 +157,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
-    "https://web-store-server.herokuapp.com",
+    "https://web-store-front.herokuapp.com",
     "https://herokuapp.com",
     "http://localhost:8080",
     "http://90.150.175.71",
