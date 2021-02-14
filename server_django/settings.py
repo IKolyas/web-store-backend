@@ -60,9 +60,6 @@ MIDDLEWARE = [
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-CORS_ORIGIN_WHITELIST = [
-    'web-store-front.herokuapp.com',
-]
 CORS_ALLOW_HEADERS = (
         'x-requested-with',
         'content-type',
