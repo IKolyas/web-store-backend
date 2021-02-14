@@ -11,12 +11,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import os
+import dj_database_url
 import django_heroku
 from corsheaders.defaults import default_headers
-
-import dj_database_url
-
-prod_db = dj_database_url.config(conn_max_age=500)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.join(os.path.abspath(__file__))
@@ -25,12 +22,11 @@ BASE_DIR = os.path.join(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'K_KEY'
+SECRET_KEY = "S_KEY"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.herokuapp.com']
 
 # Application definition
 
@@ -40,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    # whitenoise
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'rest_framework',
     'django_filters',
@@ -57,31 +55,11 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# CORS_ALLOWED_ORIGINS = [
-#     'https://web-store-front.herokuapp.com',
-#     'http://web-store-front.herokuapp.com',
-#     'https://herokuapp.com',
-#     'http://herokuapp.com',
-#     'https://90.150.175.71',
-#     'http://90.150.175.71',
-# ]
-#
-# CORS_ALLOW_ALL_ORIGINS = True
-#
-# CORS_ALLOW_HEADERS = (
-#     'x-requested-with',
-#     'content-type',
-#     'accept',
-#     'origin',
-#     'authorization',
-#     'x-csrftoken'
-#     'Access-Control-Allow-Origin'
-# )
 
 ROOT_URLCONF = 'server_django.urls'
+
 
 TEMPLATES = [
     {
@@ -95,6 +73,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'debug': DEBUG,
         },
     },
 ]
@@ -111,7 +90,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
-DATABASES['default'].update(prod_db)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -144,8 +122,8 @@ REST_FRAMEWORK = {
 }
 
 # SESSIONS _________________________________________________
-CART_SESSION_ID = 'cart'
-SESSION_COOKIE_AGE = 500
+# CART_SESSION_ID = 'cart'
+# SESSION_COOKIE_AGE = 500
 # SESSION_COOKIE_SECURE = True   #if HTTPS
 # SESSION_EXPIRE_AT_BROWSER_CLOSE =True   #if browser close
 # SESSION_SAVE_EVERY_REQUEST = True   #save session for DataBase
@@ -160,7 +138,7 @@ SESSION_COOKIE_AGE = 500
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/Moscow'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -168,18 +146,26 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Change 'default' database configuration with $DATABASE_URL.
+DATABASES['default'].update(dj_database_url.config(conn_max_age=500, ssl_require=True))
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+
+STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
-STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
