@@ -21,12 +21,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'b@g+qv-0&@pv($r@3&hlr+3mbzq8c^p3s0ec=mufc&%2491#(@'
+SECRET_KEY = 'K_KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'web-store-front.herokuapp.com',
+]
 
 # Application definition
 
@@ -61,18 +63,17 @@ MIDDLEWARE = [
 
 
 CORS_ORIGIN_WHITELIST = [
-    'https://web-store-front.herokuapp.com',
+    'web-store-front.herokuapp.com',
 ]
 CORS_ALLOW_HEADERS = (
-        'x-requested-with',
-        'content-type',
-        'accept',
-        'origin',
-        'authorization',
-        'x-csrftoken'
-        'Access-Control-Allow-Origin'
+    'x-requested-with',
+    'content-type',
+    'accept',
+    'origin',
+    'authorization',
+    'x-csrftoken'
+    'Access-Control-Allow-Origin'
 )
-
 
 ROOT_URLCONF = 'server_django.urls'
 
