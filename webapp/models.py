@@ -40,7 +40,7 @@ class Product(models.Model):
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE, verbose_name='подкатегория')
     title = models.CharField(max_length=100, null=False, verbose_name='наименование')
     description = models.TextField(default='', verbose_name='описание')
-    price = models.DecimalField(null=False, max_digits=10, decimal_places=2, verbose_name='цена')
+    price = models.BigIntegerField(null=False, verbose_name='цена')
     size = models.CharField(max_length=5, choices=PRODUCT_SIZES, blank=True, verbose_name='размер')
     color = models.CharField(max_length=16, blank=True, verbose_name='цвет')
     quantity_views = models.IntegerField(default=0, verbose_name='просмотров')
