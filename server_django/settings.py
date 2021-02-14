@@ -53,7 +53,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'corsheaders.middleware.CorsPostCsrfMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
 CORS_ORIGIN_ALLOW_ALL = True
@@ -114,31 +113,35 @@ CORS_ALLOWED_ORIGINS = [
     'http://herokuapp.com',
 ]
 
-CSRF_TRUSTED_ORIGINS = [
-    'web-store-front.herokuapp.com',
-    'herokuapp.com',
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     'web-store-front.herokuapp.com',
+#     'herokuapp.com',
+# ]
 
 CORS_ORIGIN_WHITELIST = [
+    'https://web-store-front.herokuapp.com',
+    'http://web-store-front.herokuapp.com',
+    'https://herokuapp.com',
+    'http://herokuapp.com',
     'http://google.com',
     'http://hostname.example.com',
     'http://localhost:8000',
     'http://127.0.0.1:9000'
 ]
-CORS_ALLOW_CREDENTIALS = True
-
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-    'Access-Control-Allow-Origin',
-]
+# CORS_ALLOW_CREDENTIALS = True
+#
+# CORS_ALLOW_HEADERS = [
+#     'accept',
+#     'accept-encoding',
+#     'authorization',
+#     'content-type',
+#     'dnt',
+#     'origin',
+#     'user-agent',
+#     'x-csrftoken',
+#     'x-requested-with',
+#     'Access-Control-Allow-Origin',
+# ]
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
