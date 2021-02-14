@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsPostCsrfMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
 
@@ -111,6 +112,24 @@ CORS_ALLOWED_ORIGINS = [
     'http://web-store-front.herokuapp.com',
     'https://herokuapp.com',
     'http://herokuapp.com',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'web-store-front.herokuapp.com',
+    'herokuapp.com',
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'Access-Control-Allow-Origin',
 ]
 
 REST_FRAMEWORK = {
