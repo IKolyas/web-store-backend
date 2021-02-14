@@ -24,9 +24,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'K_KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    '90.150.175.71',
+                 ]
 
 # Application definition
 
@@ -46,14 +48,13 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.BrokenLinkEmailsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
 
@@ -124,39 +125,10 @@ CORS_ALLOWED_ORIGINS = [
     'http://web-store-front.herokuapp.com',
     'https://herokuapp.com',
     'http://herokuapp.com',
-    'http://90.150.175.71'
+    '90.150.175.71',
 ]
 
-# CSRF_TRUSTED_ORIGINS = [
-#     'web-store-front.herokuapp.com',
-#     'herokuapp.com',
-# ]
-
-CORS_ORIGIN_WHITELIST = [
-    'https://web-store-front.herokuapp.com',
-    'http://web-store-front.herokuapp.com',
-    'https://herokuapp.com',
-    'http://herokuapp.com',
-    'http://google.com',
-    'http://hostname.example.com',
-    'http://localhost:8000',
-    'http://127.0.0.1:9000'
-    '90.150.175.71'
-]
-# CORS_ALLOW_CREDENTIALS = True
-#
-# CORS_ALLOW_HEADERS = [
-#     'accept',
-#     'accept-encoding',
-#     'authorization',
-#     'content-type',
-#     'dnt',
-#     'origin',
-#     'user-agent',
-#     'x-csrftoken',
-#     'x-requested-with',
-#     'Access-Control-Allow-Origin',
-# ]
+CORS_ALLOW_ALL_ORIGINS = True
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
