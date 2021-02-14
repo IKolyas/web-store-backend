@@ -60,11 +60,10 @@ MIDDLEWARE = [
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = default_headers + (
-    'Access-Control-Allow-Origin',
-)
+CORS_ORIGIN_WHITELIST = [
+    'web-store-front.herokuapp.com',
+
+]
 
 
 ROOT_URLCONF = 'server_django.urls'
