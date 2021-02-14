@@ -28,6 +28,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'herokuapp.com',
+    '90.150.175.71'
 ]
 
 # Application definition
@@ -62,9 +63,7 @@ MIDDLEWARE = [
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-CORS_ORIGIN_WHITELIST = [
-    'https://web-store-front.herokuapp.com',
-]
+
 CORS_ALLOW_HEADERS = (
     'x-requested-with',
     'content-type',
@@ -128,6 +127,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://web-store-front.herokuapp.com',
     'https://herokuapp.com',
     'http://herokuapp.com',
+    '90.150.175.71'
 ]
 
 # CSRF_TRUSTED_ORIGINS = [
@@ -135,16 +135,17 @@ CORS_ALLOWED_ORIGINS = [
 #     'herokuapp.com',
 # ]
 
-# CORS_ORIGIN_WHITELIST = [
-#     'https://web-store-front.herokuapp.com',
-#     'http://web-store-front.herokuapp.com',
-#     'https://herokuapp.com',
-#     'http://herokuapp.com',
-#     'http://google.com',
-#     'http://hostname.example.com',
-#     'http://localhost:8000',
-#     'http://127.0.0.1:9000'
-# ]
+CORS_ORIGIN_WHITELIST = [
+    'https://web-store-front.herokuapp.com',
+    'http://web-store-front.herokuapp.com',
+    'https://herokuapp.com',
+    'http://herokuapp.com',
+    'http://google.com',
+    'http://hostname.example.com',
+    'http://localhost:8000',
+    'http://127.0.0.1:9000'
+    '90.150.175.71'
+]
 # CORS_ALLOW_CREDENTIALS = True
 #
 # CORS_ALLOW_HEADERS = [
