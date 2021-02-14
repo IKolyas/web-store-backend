@@ -161,7 +161,10 @@ CORS_ALLOWED_ORIGINS = [
     "https://web-store-server.herokuapp.com",
     "https://herokuapp.com",
     "http://localhost:8080",
+    "http://90.150.175.71",
+    "https://90.150.175.71"
 ]
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
