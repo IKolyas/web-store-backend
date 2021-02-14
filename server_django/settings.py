@@ -26,9 +26,7 @@ SECRET_KEY = 'K_KEY'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    '90.150.175.71',
-                 ]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -60,7 +58,16 @@ MIDDLEWARE = [
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+CORS_ALLOWED_ORIGINS = [
+    'https://web-store-front.herokuapp.com',
+    'http://web-store-front.herokuapp.com',
+    'https://herokuapp.com',
+    'http://herokuapp.com',
+    'https://90.150.175.71',
+    'http://90.150.175.71',
+]
 
+CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_HEADERS = (
     'x-requested-with',
@@ -120,15 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    'https://web-store-front.herokuapp.com',
-    'http://web-store-front.herokuapp.com',
-    'https://herokuapp.com',
-    'http://herokuapp.com',
-    '90.150.175.71',
-]
 
-CORS_ALLOW_ALL_ORIGINS = True
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
