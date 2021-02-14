@@ -1,0 +1,1 @@
+web: gunicorn web-store-backend.wsgi --log-file -
