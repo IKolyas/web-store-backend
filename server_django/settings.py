@@ -108,6 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
 #
 CORS_ALLOWED_ORIGINS = [
     'https://web-store-front.herokuapp.com',
+    'http://web-store-front.herokuapp.com',
+    'https://herokuapp.com',
+    'http://herokuapp.com',
 ]
 
 REST_FRAMEWORK = {
