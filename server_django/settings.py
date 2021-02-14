@@ -27,7 +27,7 @@ SECRET_KEY = 'K_KEY'
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'web-store-front.herokuapp.com',
+    'herokuapp.com',
 ]
 
 # Application definition
@@ -63,7 +63,7 @@ MIDDLEWARE = [
 
 
 CORS_ORIGIN_WHITELIST = [
-    'web-store-front.herokuapp.com',
+    'herokuapp.com',
 ]
 CORS_ALLOW_HEADERS = (
     'x-requested-with',
