@@ -25,9 +25,9 @@ SECRET_KEY = 'b@g+qv-0&@pv($r@3&hlr+3mbzq8c^p3s0ec=mufc&%2491#(@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://web-store-server.herokuapp.com']
+ALLOWED_HOSTS = ['https://web-store-front.herokuapp.com']
 CORS_ORIGIN_WHITELIST = (
-       'https://web-store-server.herokuapp.com',
+       'https://web-store-front.herokuapp.com',
 )
 # Application definition
 
