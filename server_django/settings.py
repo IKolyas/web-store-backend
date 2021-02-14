@@ -26,10 +26,7 @@ SECRET_KEY = 'K_KEY'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    'herokuapp.com',
-    '90.150.175.71'
-]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -127,7 +124,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://web-store-front.herokuapp.com',
     'https://herokuapp.com',
     'http://herokuapp.com',
-    '90.150.175.71'
+    'http://90.150.175.71'
 ]
 
 # CSRF_TRUSTED_ORIGINS = [
