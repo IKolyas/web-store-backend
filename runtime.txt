@@ -1,2 +1,2 @@
 python-3.9.1
-web: gunicorn web-store-server.wsgi --log-file -
+web: gunicorn web_store_backend.wsgi --log-file -
