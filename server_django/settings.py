@@ -25,8 +25,10 @@ SECRET_KEY = 'b@g+qv-0&@pv($r@3&hlr+3mbzq8c^p3s0ec=mufc&%2491#(@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = ['https://web-store-server.herokuapp.com']
+CORS_ORIGIN_WHITELIST = (
+       'https://web-store-server.herokuapp.com',
+)
 # Application definition
 
 INSTALLED_APPS = [
@@ -190,6 +192,5 @@ MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
 
-CORS_ORIGIN_ALLOW_ALL = True
 # Activate Django-Heroku.
 django_heroku.settings(locals())
