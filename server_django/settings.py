@@ -25,7 +25,7 @@ SECRET_KEY = 'b@g+qv-0&@pv($r@3&hlr+3mbzq8c^p3s0ec=mufc&%2491#(@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
-
+CORS_ORIGIN_ALLOW_ALL = True
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'server_django.urls'
@@ -107,8 +107,41 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 #
 CORS_ALLOWED_ORIGINS = [
-    "https://web-store-front.herokuapp.com",
+    'https://web-store-front.herokuapp.com',
+    'http://web-store-front.herokuapp.com',
+    'https://herokuapp.com',
+    'http://herokuapp.com',
 ]
+
+# CSRF_TRUSTED_ORIGINS = [
+#     'web-store-front.herokuapp.com',
+#     'herokuapp.com',
+# ]
+
+CORS_ORIGIN_WHITELIST = [
+    'https://web-store-front.herokuapp.com',
+    'http://web-store-front.herokuapp.com',
+    'https://herokuapp.com',
+    'http://herokuapp.com',
+    'http://google.com',
+    'http://hostname.example.com',
+    'http://localhost:8000',
+    'http://127.0.0.1:9000'
+]
+# CORS_ALLOW_CREDENTIALS = True
+#
+# CORS_ALLOW_HEADERS = [
+#     'accept',
+#     'accept-encoding',
+#     'authorization',
+#     'content-type',
+#     'dnt',
+#     'origin',
+#     'user-agent',
+#     'x-csrftoken',
+#     'x-requested-with',
+#     'Access-Control-Allow-Origin',
+# ]
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
