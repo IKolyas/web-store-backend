@@ -26,9 +26,7 @@ SECRET_KEY = 'b@g+qv-0&@pv($r@3&hlr+3mbzq8c^p3s0ec=mufc&%2491#(@'
 DEBUG = True
 
 ALLOWED_HOSTS = ['https://web-store-front.herokuapp.com']
-CORS_ORIGIN_WHITELIST = (
-       'https://web-store-front.herokuapp.com',
-)
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -51,7 +49,6 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'corsheaders.middleware.CorsPostCsrfMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -60,6 +57,12 @@ MIDDLEWARE = [
 ]
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+CORS_ALLOWED_ORIGINS = [
+    'https://web-store-front.herokuapp.com',
+    'https://herokuapp.com',
+]
 
 ROOT_URLCONF = 'server_django.urls'
 
@@ -186,6 +189,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
