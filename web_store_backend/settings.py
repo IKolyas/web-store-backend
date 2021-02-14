@@ -159,8 +159,6 @@ ALLOWED_HOSTS = ['*']
 CORS_ALLOWED_ORIGINS = [
     "https://web-store-server.herokuapp.com",
     "https://herokuapp.com",
-    "http://web-store-server.herokuapp.com",
-    "http://herokuapp.com",
     "http://localhost:8080",
     "http://90.150.175.71",
     "https://90.150.175.71"
