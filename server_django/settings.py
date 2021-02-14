@@ -106,28 +106,28 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 #
-CORS_ALLOWED_ORIGINS = [
-    'https://web-store-front.herokuapp.com',
-    'http://web-store-front.herokuapp.com',
-    'https://herokuapp.com',
-    'http://herokuapp.com',
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'https://web-store-front.herokuapp.com',
+#     'http://web-store-front.herokuapp.com',
+#     'https://herokuapp.com',
+#     'http://herokuapp.com',
+# ]
 
 # CSRF_TRUSTED_ORIGINS = [
 #     'web-store-front.herokuapp.com',
 #     'herokuapp.com',
 # ]
 
-CORS_ORIGIN_WHITELIST = [
-    'https://web-store-front.herokuapp.com',
-    'http://web-store-front.herokuapp.com',
-    'https://herokuapp.com',
-    'http://herokuapp.com',
-    'http://google.com',
-    'http://hostname.example.com',
-    'http://localhost:8000',
-    'http://127.0.0.1:9000'
-]
+# CORS_ORIGIN_WHITELIST = [
+#     'https://web-store-front.herokuapp.com',
+#     'http://web-store-front.herokuapp.com',
+#     'https://herokuapp.com',
+#     'http://herokuapp.com',
+#     'http://google.com',
+#     'http://hostname.example.com',
+#     'http://localhost:8000',
+#     'http://127.0.0.1:9000'
+# ]
 # CORS_ALLOW_CREDENTIALS = True
 #
 # CORS_ALLOW_HEADERS = [
