@@ -27,7 +27,7 @@ SECRET_KEY = 'K_KEY'
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'herokuapp.com',
+    '52.214.142.212:443',
 ]
 
 # Application definition
@@ -63,7 +63,7 @@ MIDDLEWARE = [
 
 
 CORS_ORIGIN_WHITELIST = [
-    'herokuapp.com',
+    '52.214.142.212:443',
 ]
 CORS_ALLOW_HEADERS = (
     'x-requested-with',
@@ -122,13 +122,10 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-#
-# CORS_ALLOWED_ORIGINS = [
-#     'https://web-store-front.herokuapp.com',
-#     'http://web-store-front.herokuapp.com',
-#     'https://herokuapp.com',
-#     'http://herokuapp.com',
-# ]
+
+CORS_ALLOWED_ORIGINS = [
+    'https://52.214.142.212:443',
+]
 
 # CSRF_TRUSTED_ORIGINS = [
 #     'web-store-front.herokuapp.com',
