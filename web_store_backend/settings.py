@@ -91,22 +91,22 @@ WSGI_APPLICATION = 'web_store_backend.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 #
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, "db.sqlite3"),
-    }
-}
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'o1dxt15wa6tk6wxm',
-#         'USER': 'j4bmgbuvsh0wp8qq',
-#         'PASSWORD': 'xanjk8lcyyz1whva',
-#         'HOST': 'lmc8ixkebgaq22lo.chr7pe7iynqr.eu-west-1.rds.amazonaws.com',
-#         'PORT': '3306',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, "db.sqlite3"),
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'o1dxt15wa6tk6wxm',
+        'USER': 'j4bmgbuvsh0wp8qq',
+        'PASSWORD': 'xanjk8lcyyz1whva',
+        'HOST': 'lmc8ixkebgaq22lo.chr7pe7iynqr.eu-west-1.rds.amazonaws.com',
+        'PORT': '3306',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
