@@ -8,7 +8,7 @@ class Profiles(models.Model):
         ('m', 'м'),
         ('f', 'ж')
     ]
-    user_id = models.ForeignKey(User, on_delete=models.RESTRICT, null=False)
+    user = models.ForeignKey(User, on_delete=models.RESTRICT, null=False)
     gender = models.CharField(max_length=1, choices=GENDER)
     birthday = models.DateField(db_index=True)
     hometown = models.CharField(max_length=200)
