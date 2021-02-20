@@ -138,7 +138,7 @@ class ProductSizesView(generics.ListAPIView):
         if category is not None:
             queryset = queryset.filter(subcategory_id=category)
         if subcategory is not None:
-            queryset = queryset.filter(subcategory_id=subcategory)
+            queryset = queryset.filter(subcategory_id_id=subcategory)
 
         return queryset
 
