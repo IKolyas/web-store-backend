@@ -99,6 +99,7 @@ WSGI_APPLICATION = 'web_store_backend.wsgi.application'
 # }
 DATABASES = {
     'default': {
+
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'o1dxt15wa6tk6wxm',
         'USER': 'j4bmgbuvsh0wp8qq',
