@@ -92,8 +92,8 @@ class Image(models.Model):
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='img')
     # path = models.ImageField(upload_to='products/img/', blank=True, )
 
-    image_path = models.CharField(max_length=500)
-    image_name = models.CharField(max_length=200)
+    image_path = models.CharField(max_length=500, default='')
+    image_name = models.CharField(max_length=200, default='')
 
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)

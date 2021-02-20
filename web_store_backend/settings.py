@@ -108,6 +108,7 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+DATABASES['default']['OPTIONS'] = {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -179,7 +180,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://90.150.175.71",
     "https://90.150.175.71"
 ]
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
