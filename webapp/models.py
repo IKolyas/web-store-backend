@@ -1,8 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class Category(models.Model):
-    title = models.CharField(max_length=50, verbose_name='категория')
+    title = models.CharField(max_length=50, verbose_name='категория', null=False)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
@@ -14,8 +18,15 @@ class Category(models.Model):
 
 
 class Subcategory(models.Model):
-    title = models.CharField(max_length=50, verbose_name='подкатегория')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='категория', related_name='sub')
+    title = models.CharField(max_length=50, verbose_name='подкатегория', null=False)
+    category_id = models.ForeignKey(Category,
+                                    on_delete=models.RESTRICT,
+                                    verbose_name='категория',
+                                    related_name='sub',
+                                    null=False
+                                    )
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
@@ -28,28 +39,27 @@ class Subcategory(models.Model):
 
 class Product(models.Model):
     PRODUCT_SIZES = [
-                ('S', 'Small'),
-                ('M', 'Medium'),
-                ('L', 'Large'),
-                ('1', '1 - спальные'),
-                ('3', '3 - спальные'),
-                ('2', '2 - спальные'),
-            ]
-    created = models.DateTimeField(auto_now_add=True, verbose_name='дата добавления')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='категория')
-    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE, verbose_name='подкатегория')
-    title = models.CharField(max_length=100, null=False, verbose_name='наименование')
+        ('S', 'Small'),
+        ('M', 'Medium'),
+        ('L', 'Large'),
+        ('1', '1 - спальные'),
+        ('3', '3 - спальные'),
+        ('2', '2 - спальные'),
+    ]
+    title = models.CharField(max_length=100, verbose_name='наименование', null=False)
+    subcategory_id = models.ForeignKey(Subcategory, on_delete=models.RESTRICT, verbose_name='подкатегория')
+    brief_description = models.TextField(default='', verbose_name='краткое описание')
     description = models.TextField(default='', verbose_name='описание')
-    price = models.DecimalField(null=False, max_digits=10, decimal_places=2, verbose_name='цена')
-    size = models.CharField(max_length=5, choices=PRODUCT_SIZES, blank=True, verbose_name='размер')
+    price = models.PositiveIntegerField(null=False, verbose_name='цена')
+    size = models.CharField(max_length=20, blank=True, verbose_name='размер')
     color = models.CharField(max_length=16, blank=True, verbose_name='цвет')
-    quantity_views = models.IntegerField(default=0, verbose_name='просмотров')
-    quantity_orders = models.IntegerField(default=0, verbose_name='заказов')
-    quantity_stock = models.IntegerField(default=0, verbose_name='на складе')
-    is_active = models.BooleanField(default=True, verbose_name='наличие товара')
+    views = models.PositiveBigIntegerField(default=0, verbose_name='просмотры')
+    quantity_stock = models.IntegerField(default=0, verbose_name='кол-во на складе')
 
-    # добавить уникальность
-    barcode = models.IntegerField(blank=True, default='', verbose_name='штрихкод')
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    barcode = models.IntegerField(blank=True, default='', verbose_name='код товара', unique=True)
 
     def __str__(self):
         return f'{self.title}'
@@ -57,7 +67,7 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'товар'
         verbose_name_plural = 'Товары'
-        ordering = ('created',)
+        ordering = ('title',)
 
 
 # class Sizes(models.Model):
@@ -80,7 +90,13 @@ class Product(models.Model):
 
 class Image(models.Model):
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='img')
-    path = models.ImageField(upload_to='products/img/', blank=True, )
+    # path = models.ImageField(upload_to='products/img/', blank=True, )
+
+    image_path = models.CharField(max_length=500)
+    image_name = models.CharField(max_length=200)
+
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = 'картинка'
@@ -89,15 +105,18 @@ class Image(models.Model):
 
 
 class Review(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
-    user_name = models.CharField(max_length=50)
-    review = models.TextField(default='')
+    from_user_id = models.ForeignKey(User, on_delete=models.RESTRICT, null=False)
+    for_product_id = models.ForeignKey(Product, on_delete=models.RESTRICT, null=False)
+    if_like = models.BooleanField(null=False, default=1)
+    review_text = models.TextField(max_length=1000)
+
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.user_name
+        return self.review_text
 
     class Meta:
         verbose_name = 'отзыв'
         verbose_name_plural = 'Отзывы'
-        ordering = ('created',)
+        ordering = ('from_user_id',)
