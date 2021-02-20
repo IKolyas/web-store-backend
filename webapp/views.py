@@ -5,8 +5,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import rest_framework
 from rest_framework import filters
 
-from .serializers import ProductSerializer, CategorySerializer, ProductSizesSerializer, BasketProductsSerializer
-from .models import Product, Category
+from .serializers import ProductSerializer, CategorySerializer, SubcategorySerializer, ProductSizesSerializer, BasketProductsSerializer
+from .models import Product, Category, Subcategory
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
@@ -25,6 +25,8 @@ class ProductFilter(rest_framework.FilterSet):
     price_max = rest_framework.NumberFilter(field_name="price", lookup_expr='lte')
     sizes = rest_framework.CharFilter(field_name='size', lookup_expr='in')
     product = rest_framework.CharFilter(field_name='product')
+    category = rest_framework.CharFilter(field_name='subcategory_id')
+    subcategory = rest_framework.CharFilter(field_name='subcategory_id')
 
     class Meta:
         model = Product
@@ -119,7 +121,7 @@ class ProductsFilterCategoryView(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_class = ProductFilter
     search_fields = ['title']
-    ordering_fields = ['title', 'price', 'quantity_views']
+    ordering_fields = ['title', 'price', 'views']
 
 
 class ProductSizesView(generics.ListAPIView):
@@ -134,7 +136,7 @@ class ProductSizesView(generics.ListAPIView):
         subcategory = self.request.query_params.get('subcategory', None)
 
         if category is not None:
-            queryset = queryset.filter(category_id=category)
+            queryset = queryset.filter(subcategory_id=category)
         if subcategory is not None:
             queryset = queryset.filter(subcategory_id=subcategory)
 

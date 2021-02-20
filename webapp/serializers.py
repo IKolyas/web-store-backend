@@ -4,15 +4,12 @@ from webapp.models import Category, Subcategory, Product, Image, Review
 
 
 class SubcategorySerializer(serializers.ModelSerializer):
+    # category = CategorySerializer()
+    # category_title = serializers.IntegerField(source='subcategory_id.category_id.title', read_only=True)
+
     class Meta:
         model = Subcategory
-        fields = ('id', 'title',)
-
-    def create(self, validated_data):
-        subject = Subcategory.objects.create(parent=validated_data['category']['id'],
-                                             child_name=validated_data['sub'])
-
-        return subject
+        fields = ('id', 'title', 'category_id',)
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -22,11 +19,17 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ('id', 'title', 'sub')
 
+    # def create(self, validated_data):
+    #     subject = Subcategory.objects.create(parent=validated_data['category']['title'],
+    #                                          child_name=validated_data['sub'])
+    #
+    #     return subject
+
 
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
-        fields = ('path',)
+        fields = ('image_path', 'image_name')
 
     def create(self, validated_data):
         subject = Image.objects.create(parent=validated_data['product']['id'], child_name=validated_data['img'])
@@ -45,26 +48,32 @@ class ImageSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    category = serializers.CharField(source='category.title', read_only=True)
-    subcategory = serializers.CharField(source='subcategory.title', read_only=True)
+    # category_id = serializers.CharField(source='category.title', read_only=True)
+    # subcategory_id = serializers.CharField(source='subcategory.title', read_only=True)
+    # subcategory = SubcategorySerializer()
+    subcategory_id = serializers.IntegerField(source='subcategory_id.id', read_only=True)
+    category_id = serializers.IntegerField(source='subcategory_id.category_id.id', read_only=True)
+    # category_id = subcategory_id.Meta
+    # category_id = CategorySerializer()
     img = ImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product
         fields = (
             'id',
-            'category',
-            'subcategory',
+            'subcategory_id',
+            'category_id',
             'title',
+            'brief_description',
             'description',
             'price',
             'size',
             'color',
-            'quantity_views',
-            'quantity_orders',
+            'views',
             'quantity_stock',
-            # 'created',
-            # 'barcode',
+            'create_at',
+            'update_at',
+            'barcode',
             'img'
         )
 
@@ -76,12 +85,12 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 
 class ProductSizesSerializer(serializers.ModelSerializer):
-    category = serializers.CharField(source='category.id', read_only=True)
-    subcategory = serializers.CharField(source='subcategory.id', read_only=True)
+    category_id = serializers.CharField(source='category.id', read_only=True)
+    subcategory_id = serializers.CharField(source='subcategory.id', read_only=True)
 
     class Meta:
         model = Product
-        fields = 'category', 'subcategory', 'size'
+        fields = 'category_id', 'subcategory_id', 'size'
 
 
 # Сериализация корзины
