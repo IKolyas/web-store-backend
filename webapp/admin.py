@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 
 
 class Gallery(admin.TabularInline):
-    fk_name = 'product_id'
+    fk_name = 'product'
     model = Image
 
 
@@ -20,7 +20,7 @@ class Gallery(admin.TabularInline):
 
 
 class Catalog(admin.TabularInline):
-    fk_name = 'subcategory_id'
+    fk_name = 'subcategory'
     model = Product
 
 
