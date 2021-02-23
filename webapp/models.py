@@ -25,8 +25,8 @@ class Subcategory(models.Model):
                                  related_name='sub',
                                  null=False
                                  )
-    create_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField(auto_now=True)
+    create_at = models.DateTimeField(auto_now_add=True, verbose_name='дата создания')
+    update_at = models.DateTimeField(auto_now=True, verbose_name='дата обновления')
 
     def __str__(self):
         return self.title
@@ -92,7 +92,7 @@ class Image(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='img')
     # path = models.ImageField(upload_to='products/img/', blank=True, )
 
-    image_path = models.CharField(max_length=500, default='')
+    image_path = models.CharField(max_length=500, default='https://raw.githubusercontent.com/IKolyas/static/master/store/media/images/')
     image_name = models.CharField(max_length=200, default='')
 
     create_at = models.DateTimeField(auto_now_add=True)

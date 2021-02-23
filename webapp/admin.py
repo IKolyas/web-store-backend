@@ -43,11 +43,8 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Subcategory)
 class SubcategoryAdmin(admin.ModelAdmin):
     inlines = [Catalog]
-    list_display = ('category_id', 'title', 'products', 'create_at', 'update_at')
-
-    # def products(self, obj):
-    #     result = len(Product.objects.filter(subcategory_id=obj))
-    #     return result
+    list_display = ('title', 'category_id', 'products', 'create_at', 'update_at')
+    list_filter = ('category_id', 'create_at')
 
     def products(self, obj):
         count = Product.objects.filter(subcategory_id=obj).count()
@@ -80,7 +77,7 @@ class ProductsAdmin(admin.ModelAdmin):
     fields = [('title', 'subcategory',), ('price', 'size', 'color',),
               ('brief_description', 'description',),
               ('quantity_stock', 'views', 'barcode')]
-    list_filter = ('subcategory_id', 'create_at')
+    list_filter = ('subcategory_id__category_id', 'subcategory_id', 'create_at')
     # поиск по штрихкоду
     search_fields = ['barcode__startswith']
 
