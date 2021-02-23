@@ -66,7 +66,7 @@ class ProductsAdmin(admin.ModelAdmin):
     inlines = [Gallery]
     list_display = (
         'title',
-        'subcategory_id',
+        'subcategory',
         'price',
         'size',
         'color',
@@ -77,7 +77,7 @@ class ProductsAdmin(admin.ModelAdmin):
         'reviews',
         'create_at',
         'update_at')
-    fields = [('title', 'subcategory_id',), ('price', 'size', 'color',),
+    fields = [('title', 'subcategory',), ('price', 'size', 'color',),
               ('brief_description', 'description',),
               ('quantity_stock', 'views', 'barcode')]
     list_filter = ('subcategory_id', 'create_at')

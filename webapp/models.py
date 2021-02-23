@@ -20,11 +20,11 @@ class Category(models.Model):
 class Subcategory(models.Model):
     title = models.CharField(max_length=50, verbose_name='подкатегория', null=False)
     category = models.ForeignKey(Category,
-                                    on_delete=models.RESTRICT,
-                                    verbose_name='категория',
-                                    related_name='sub',
-                                    null=False
-                                    )
+                                 on_delete=models.RESTRICT,
+                                 verbose_name='категория',
+                                 related_name='sub',
+                                 null=False
+                                 )
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
