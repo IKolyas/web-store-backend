@@ -5,7 +5,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import rest_framework
 from rest_framework import filters
 
-from .serializers import ProductSerializer, CategorySerializer, SubcategorySerializer, ProductSizesSerializer, BasketProductsSerializer
+from .serializers import ProductSerializer, CategorySerializer, SubcategorySerializer, ProductSizesSerializer, \
+    BasketProductsSerializer
 from .models import Product, Category, Subcategory
 from rest_framework import generics
 from rest_framework.response import Response
@@ -23,10 +24,11 @@ class DefaultPagination(PageNumberPagination):
 class ProductFilter(rest_framework.FilterSet):
     price_min = rest_framework.NumberFilter(field_name="price", lookup_expr='gte')
     price_max = rest_framework.NumberFilter(field_name="price", lookup_expr='lte')
+    size = rest_framework.CharFilter(field_name='size', lookup_expr='contains')
     sizes = rest_framework.CharFilter(field_name='size', lookup_expr='in')
     product = rest_framework.CharFilter(field_name='product')
-    category = rest_framework.CharFilter(field_name='subcategory_id')
-    subcategory = rest_framework.CharFilter(field_name='subcategory_id')
+    category = rest_framework.CharFilter(field_name='subcategory__category')
+    subcategory = rest_framework.CharFilter(field_name='subcategory')
 
     class Meta:
         model = Product
@@ -121,26 +123,16 @@ class ProductsFilterCategoryView(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_class = ProductFilter
     search_fields = ['title']
-    ordering_fields = ['title', 'price', 'views']
+    ordering_fields = ['title', 'price', 'views', 'category', 'subcategory']
 
 
 class ProductSizesView(generics.ListAPIView):
     permission_classes = (AllowAny,)
+    queryset = Product.objects.values('size').distinct()
     serializer_class = ProductSizesSerializer
     pagination_class = DefaultPagination
-
-    def get_queryset(self):
-        queryset = Product.objects.values('size').distinct()
-
-        category = self.request.query_params.get('category', None)
-        subcategory = self.request.query_params.get('subcategory', None)
-
-        if category is not None:
-            queryset = queryset.filter(subcategory_id=category)
-        if subcategory is not None:
-            queryset = queryset.filter(subcategory_id=subcategory)
-
-        return queryset
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_class = ProductFilter
 
 
 class ArticleOneView(generics.ListAPIView):
@@ -166,4 +158,3 @@ class BasketView(generics.ListAPIView):
             queryset = Product.objects.filter(pk__in=list(ids))
             print(queryset)
             return queryset
-

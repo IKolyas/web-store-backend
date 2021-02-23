@@ -19,14 +19,14 @@ class Category(models.Model):
 
 class Subcategory(models.Model):
     title = models.CharField(max_length=50, verbose_name='подкатегория', null=False)
-    category_id = models.ForeignKey(Category,
-                                    on_delete=models.RESTRICT,
-                                    verbose_name='категория',
-                                    related_name='sub',
-                                    null=False
-                                    )
-    create_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField(auto_now=True)
+    category = models.ForeignKey(Category,
+                                 on_delete=models.RESTRICT,
+                                 verbose_name='категория',
+                                 related_name='sub',
+                                 null=False
+                                 )
+    create_at = models.DateTimeField(auto_now_add=True, verbose_name='дата создания')
+    update_at = models.DateTimeField(auto_now=True, verbose_name='дата обновления')
 
     def __str__(self):
         return self.title
@@ -47,7 +47,7 @@ class Product(models.Model):
         ('2', '2 - спальные'),
     ]
     title = models.CharField(max_length=100, verbose_name='наименование', null=False)
-    subcategory_id = models.ForeignKey(Subcategory, on_delete=models.RESTRICT, verbose_name='подкатегория')
+    subcategory = models.ForeignKey(Subcategory, on_delete=models.RESTRICT, verbose_name='подкатегория')
     brief_description = models.TextField(default='', verbose_name='краткое описание')
     description = models.TextField(default='', verbose_name='описание')
     price = models.PositiveIntegerField(null=False, verbose_name='цена')
@@ -89,11 +89,11 @@ class Product(models.Model):
 
 
 class Image(models.Model):
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='img')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='img')
     # path = models.ImageField(upload_to='products/img/', blank=True, )
 
-    image_path = models.CharField(max_length=500)
-    image_name = models.CharField(max_length=200)
+    image_path = models.CharField(max_length=500, default='https://raw.githubusercontent.com/IKolyas/static/master/store/media/images/')
+    image_name = models.CharField(max_length=200, default='')
 
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
@@ -105,8 +105,8 @@ class Image(models.Model):
 
 
 class Review(models.Model):
-    from_user_id = models.ForeignKey(User, on_delete=models.RESTRICT, null=False)
-    for_product_id = models.ForeignKey(Product, on_delete=models.RESTRICT, null=False)
+    from_user = models.ForeignKey(User, on_delete=models.RESTRICT, null=False)
+    for_product = models.ForeignKey(Product, on_delete=models.RESTRICT, null=False)
     if_like = models.BooleanField(null=False, default=1)
     review_text = models.TextField(max_length=1000)
 

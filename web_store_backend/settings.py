@@ -99,6 +99,7 @@ WSGI_APPLICATION = 'web_store_backend.wsgi.application'
 # }
 DATABASES = {
     'default': {
+
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'o1dxt15wa6tk6wxm',
         'USER': 'j4bmgbuvsh0wp8qq',
@@ -107,6 +108,20 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+DATABASES['default']['OPTIONS'] = {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"}
+
+
+# DATABASES = {
+#     'default': {
+#
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'd610psjrcq506m',
+#         'USER': 'htpfkskzflbprw',
+#         'PASSWORD': '3decc10222fbba644b6a78b70359441d63e8cf3ce65f45b05720d0d000cdba0a',
+#         'HOST': 'ec2-108-128-104-50.eu-west-1.compute.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -153,7 +168,7 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -178,7 +193,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://90.150.175.71",
     "https://90.150.175.71"
 ]
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

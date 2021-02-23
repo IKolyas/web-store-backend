@@ -11,7 +11,7 @@ class Orders(models.Model):
         ('delivered', 'deliv'),
         ('issued', 'issued'),
     ]
-    user_id = models.ForeignKey(User, on_delete=models.RESTRICT, null=False)
+    user = models.ForeignKey(User, on_delete=models.RESTRICT, null=False)
     order_status = models.CharField(max_length=32, choices=ORDER_STATUS)
 
     create_at = models.DateTimeField(auto_now_add=True)
@@ -27,8 +27,8 @@ class Orders(models.Model):
 
 
 class OrderProduct(models.Model):
-    order_id = models.ForeignKey(Orders, on_delete=models.CASCADE, null=False)
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, null=False)
+    order = models.ForeignKey(Orders, on_delete=models.CASCADE, null=False)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=False)
     quantity = models.PositiveIntegerField(null=False, default=1)
 
     create_at = models.DateTimeField(auto_now_add=True)
