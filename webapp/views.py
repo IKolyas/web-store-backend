@@ -125,6 +125,13 @@ class ProductsFilterCategoryView(generics.ListAPIView):
     search_fields = ['title']
     ordering_fields = ['title', 'price', 'views', 'category', 'subcategory']
 
+    def get_queryset(self):
+        order_by = self.request.query_params.get('order_by', None)
+        if order_by is not None:
+            queryset = self.queryset.order_by(order_by) if order_by == 'title' else self.queryset.order_by(
+                order_by).reverse()
+            return queryset
+
 
 class ProductSizesView(generics.ListAPIView):
     permission_classes = (AllowAny,)
