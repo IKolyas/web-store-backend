@@ -197,8 +197,6 @@ DJOSER = {
     'SERIALIZERS': {},
 }
 
-
-
 LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
@@ -223,7 +221,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
     "http://localhost",
     "http://127.0.0.1",
-    "http://90.150.175.71",
+    "https://90.150.175.71",
     "https://90.150.175.71"
 ]
 
@@ -243,9 +241,6 @@ STATICFILES_DIRS = (
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
-
-
-
 
 # djoser api
 
