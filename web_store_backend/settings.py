@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import os
+from datetime import timedelta
+
 import dj_database_url
 import django_heroku
 from corsheaders.defaults import default_headers
@@ -39,7 +41,11 @@ INSTALLED_APPS = [
     # whitenoise
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    # api rest_framework
     'rest_framework',
+    'djoser',
+    'rest_framework.authtoken',
+
     'django_filters',
     'corsheaders',
     # apps
@@ -101,7 +107,6 @@ DATABASES = {
 }
 DATABASES['default']['OPTIONS'] = {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"}
 
-
 # DATABASES = {
 #     'default': {
 #
@@ -137,26 +142,61 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 4,
     # 'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework_simplejwt.authentication.JWTAuthentication']
-    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.SessionAuthentication'],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+    ],
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
     )
-
 }
 
-# SESSIONS _________________________________________________
-# CART_SESSION_ID = 'cart'
-# SESSION_COOKIE_AGE = 500
-# SESSION_COOKIE_SECURE = True   #if HTTPS
-# SESSION_EXPIRE_AT_BROWSER_CLOSE =True   #if browser close
-# SESSION_SAVE_EVERY_REQUEST = True   #save session for DataBase
-# SESSION_EXPIRE_AT_BROWSER_CLOSE =True   #срок действия сессии истечет,
-#                                           когда пользователь закроет браузер, и параметр
-#                                           SESSION_COOKIE_AGE не будет иметь никакого эффекта.
+EMAIL_BACKEND = 'django.core.mail.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'noteskov@gmail.com'
+EMAIL_PASSWORD = 'notApp2005'
+EMAIL_USE_TLS = True
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'UPDATE_LAST_LOGIN': False,
 
-# Internationalization
-# https://docs.djangoproject.com/en/3.1/topics/i18n/
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'VERIFYING_KEY': None,
+    'AUDIENCE': None,
+    'ISSUER': None,
+
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+
+    'JTI_CLAIM': 'jti',
+
+    'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
+    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+}
+
+DJOSER = {
+    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    # activation for email
+    'SEND_ACTIVATION_EMAIL': False,
+    'SERIALIZERS': {},
+}
+
 
 
 LANGUAGE_CODE = 'ru'
@@ -181,6 +221,8 @@ CORS_ALLOWED_ORIGINS = [
     "https://web-store-front.herokuapp.com",
     "https://herokuapp.com",
     "http://localhost:8080",
+    "http://localhost",
+    "http://127.0.0.1",
     "http://90.150.175.71",
     "https://90.150.175.71"
 ]
@@ -201,3 +243,24 @@ STATICFILES_DIRS = (
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+
+
+
+# djoser api
+
+# /users/
+# /users/me/
+# /users/confirm/
+# /users/resend_activation/
+# /users/set_password/
+# /users/reset_password/
+# /users/reset_password_confirm/
+# /users/set_username/
+# /users/reset_username/
+# /users/reset_username_confirm/
+# /token/login/ (Token Based Authentication)
+# /token/logout/ (Token Based Authentication)
+# /jwt/create/ (JSON Web Token Authentication)
+# /jwt/refresh/ (JSON Web Token Authentication)
+# /jwt/verify/ (JSON Web Token Authentication)

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
 
 
@@ -54,6 +55,11 @@ class Product(models.Model):
     size = models.CharField(max_length=20, blank=True, verbose_name='размер')
     color = models.CharField(max_length=16, blank=True, verbose_name='цвет')
     views = models.PositiveBigIntegerField(default=0, verbose_name='просмотры')
+    rating = models.FloatField(
+        default=0,
+        validators=[MinValueValidator(0), MaxValueValidator(5)],
+        verbose_name='рейтинг'
+    )
     quantity_stock = models.IntegerField(default=0, verbose_name='кол-во на складе')
 
     create_at = models.DateTimeField(auto_now_add=True)
@@ -92,7 +98,8 @@ class Image(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='img')
     # path = models.ImageField(upload_to='products/img/', blank=True, )
 
-    image_path = models.CharField(max_length=500, default='https://raw.githubusercontent.com/IKolyas/static/master/store/media/images/')
+    image_path = models.CharField(max_length=500,
+                                  default='https://raw.githubusercontent.com/IKolyas/static/master/store/media/images/')
     image_name = models.CharField(max_length=200, default='')
 
     create_at = models.DateTimeField(auto_now_add=True)

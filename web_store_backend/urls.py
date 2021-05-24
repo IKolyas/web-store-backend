@@ -16,11 +16,17 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from web_store_backend.views import CustomAuthToken
 
 from web_store_backend import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api-token-auth/', CustomAuthToken.as_view()),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
+    path('auth/', include('djoser.urls.jwt')),
     path('api/', include('webapp.urls')),
+    path('users/', include('userprofile.urls'))
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

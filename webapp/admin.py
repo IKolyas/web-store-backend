@@ -69,6 +69,7 @@ class ProductsAdmin(admin.ModelAdmin):
         'color',
         'quantity_stock',
         'views',
+        'rating',
         'barcode',
         'image',
         'reviews',
@@ -76,7 +77,7 @@ class ProductsAdmin(admin.ModelAdmin):
         'update_at')
     fields = [('title', 'subcategory',), ('price', 'size', 'color',),
               ('brief_description', 'description',),
-              ('quantity_stock', 'views', 'barcode')]
+              ('quantity_stock', 'views', 'rating', 'barcode')]
     list_filter = ('subcategory_id__category_id', 'subcategory_id', 'create_at')
     # поиск по штрихкоду
     search_fields = ['barcode__startswith']

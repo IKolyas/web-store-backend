@@ -10,7 +10,7 @@ from .serializers import ProductSerializer, CategorySerializer, SubcategorySeria
 from .models import Product, Category, Subcategory
 from rest_framework import generics
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 
 # Pagination
@@ -68,56 +68,13 @@ class ProductsView(generics.ListAPIView):
     permission_classes = (AllowAny,)
     serializer_class = ProductSerializer
 
-    # pagination_class = ProductsSetPagination
-
     def get_queryset(self):
         queryset = Product.objects.all()
         return queryset
 
-    # def list(self, request, *args, **kwargs):
-    #     queryset = Product.objects.all()
-    #     serializer = ProductSerializer(queryset, many=True)
-    #
-    #     return Response(serializer.data)
-
-
-#  ФИЛЬТР ПРОДУКТОВ
-# class ProductsFilterCategoryView(generics.ListAPIView):
-#     permission_classes = (AllowAny,)
-#     serializer_class = ProductSerializer
-#
-#     # pagination_class = ProductsSetPagination
-#
-#     def get_queryset(self):
-#         queryset = Product.objects.all().exclude(quantity_stock=0)
-#         category = self.request.query_params.get('category', None)
-#         subcategory = self.request.query_params.get('subcategory', None)
-#         sizes = self.request.query_params.get('sizes', None)
-#         product = self.request.query_params.get('product', None)
-#         price_min = self.request.query_params.get('price_min', None)
-#         price_max = self.request.query_params.get('price_max', None)
-#         sort = self.request.query_params.get('sort', None)
-#         search = self.request.query_params.get('search', None)
-#
-#         if category is not None:
-#             queryset = queryset.filter(category_id=category)
-#         if subcategory is not None:
-#             queryset = queryset.filter(subcategory_id=subcategory)
-#         if sizes is not None:
-#             queryset = queryset.filter(size__in=sizes)
-#         if product is not None:
-#             queryset = queryset.filter(id=product)
-#         if price_min is not None and price_max is not None:
-#             queryset = queryset.filter(price__gte=price_min, price__lte=price_max)
-#         if search is not None:
-#             queryset = queryset.filter(title__in=search)
-#         if sort is not None:
-#             queryset = queryset.order_by(sort) if sort == 'title' else queryset.order_by(sort).reverse()
-#
-#         return queryset
 
 class ProductsFilterCategoryView(generics.ListAPIView):
-    permission_classes = (AllowAny,)
+    permission_classes = [AllowAny, ]
     queryset = Product.objects.all().exclude(quantity_stock=0)
     serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]

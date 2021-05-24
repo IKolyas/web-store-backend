@@ -64,6 +64,7 @@ class ProductSerializer(serializers.ModelSerializer):
             'size',
             'color',
             'views',
+            'rating',
             'quantity_stock',
             'create_at',
             'update_at',
@@ -93,4 +94,4 @@ class BasketProductsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'title', 'img', 'price', 'size', 'color']
+        fields = ['id', 'title', 'img', 'price', 'rating', 'size', 'color']
